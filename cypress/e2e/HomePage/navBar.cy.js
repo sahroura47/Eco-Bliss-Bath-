@@ -1,6 +1,6 @@
 describe('barre de navigation', () => {
     beforeEach(() => {
-        cy.visit('http://localhost:4200/#')
+        cy.visit('/')
     });
     it('affiche les liens de navigations', () => {
         cy.get('nav.navigation').should('be.visible');
@@ -32,6 +32,6 @@ describe('barre de navigation', () => {
     });
     it('le logo navigue vers la page d’accueil', ()=>{
         cy.get('[data-cy=nav-link-home-logo]').click();
-        cy.url().should('include','http://localhost:4200/#');
+        cy.url().should('include','/');
     })
 });

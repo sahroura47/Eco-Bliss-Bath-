@@ -1,6 +1,6 @@
 describe('CTA produits sur la page d`accueil', ()=>{
 beforeEach(()=>{
-    cy.visit('http://localhost:4200/#/');
+    cy.visit('/');
 });
 it('chaque bouton "consulter" redirige vers la page produit correcte', ()=>{
     cy.get('[data-cy=product-home-link]').then(($buttons) =>{

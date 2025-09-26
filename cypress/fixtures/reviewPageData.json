@@ -1,0 +1,8 @@
+{
+    "loginPrompt": "Connectez-vous pour ajouter un avis.",
+    "formScenarios": [
+        { "filled": {"title": "super produit"}, "empty": ["comment", "rating"] },
+        { "filled": {"comment": " très bien"}, "empty": ["title","rating"] },
+        {"filled": {"rating": "5"}, "empty": ["comment", "title"]}
+    ]
+}
