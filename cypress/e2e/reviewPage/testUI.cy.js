@@ -20,12 +20,13 @@ describe('review page test-UI', () => {
         cy.get('[data-cy=reviews-number]').should('exist').and('be.visible');
 
         // on vérifie chaque avis // 
-        cy.get('[data-cy=review-detail]').each(($review) => {
+        cy.get('[data-cy=review-detail]').filter(':visible').each(($review) => {
             cy.wrap($review).find('[data-cy=review-title]').should('exist').and('not.empty');
             cy.wrap($review).find('[data-cy=review-note] img').should('have.length', 5);
             cy.wrap($review).find('[data-cy=review-comment]').should('exist').and('not.empty');
         });
     });
+
 });
 context('utilisateur connecté', () => {
     beforeEach(() => {

@@ -1,8 +1,48 @@
 {
     "loginPrompt": "Connectez-vous pour ajouter un avis.",
     "formScenarios": [
-        { "filled": {"title": "super produit"}, "empty": ["comment", "rating"] },
-        { "filled": {"comment": " très bien"}, "empty": ["title","rating"] },
-        {"filled": {"rating": "5"}, "empty": ["comment", "title"]}
+        {
+            "filled": {
+                "title": "super produit"
+            },
+            "empty": [
+                "comment",
+                "rating"
+            ]
+        },
+        {
+            "filled": {
+                "comment": " très bien"
+            },
+            "empty": [
+                "title",
+                "rating"
+            ]
+        },
+        {
+            "filled": {
+                "rating": "5"
+            },
+            "empty": [
+                "comment",
+                "title"
+            ]
+        }
+    ],
+    "validData": [
+        {
+            "filled": {
+                "title": " testing",
+                "comment": "very long long long long long long text",
+                "rating": "4"
+            }
+        },
+        {
+            "filled": {
+                "title": "texte très très très très long pour test",
+                "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                "rating": "1"
+            }
+        }
     ]
 }
