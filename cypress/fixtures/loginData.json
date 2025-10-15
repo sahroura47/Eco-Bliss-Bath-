@@ -1,4 +1,10 @@
 {
-    "username": "test2@test.fr",
-    "password": "testtest"
+    "validData": {
+        "username": "test2@test.fr",
+        "password": "testtest"
+    },
+    "wrongData": {
+        "username": "toto@testing.fr",
+        "password": "testingwrongpass"
+    }
 }

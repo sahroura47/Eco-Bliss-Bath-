@@ -2,15 +2,17 @@ describe('validation du formulaire', () => {
     beforeEach(() => {
         cy.fixture('loginData.json').then((user) => {
             // on se connecte //
-            cy.request('POST', 'http://localhost:8081/login', {
-                username: user.username,
-                password: user.password
-            }).then((res) => {
+            cy.log(user);
+            cy.request('POST', 'http://localhost:8081/login', user.validData).then((res) => {
+                if (res.status == 200) {
                 // on stocke le token pour simuler un utilisateur connecté //
                 localStorage.setItem('user', res.body.token);
-                cy.visit('/reviews');
+                cy.visit('http://localhost:4200/#/reviews');
                 cy.get('[data-cy=review-form]').should('be.visible');
-
+                }else {
+                    cy.log(res, "aaaaaa");
+                }
+            
             });
         });
         cy.fixture('reviewPageData.json').as('reviewData');

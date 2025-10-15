@@ -1,0 +1,111 @@
+[
+    {
+        "description": "Nom vide ",
+        "data": {
+            "lastname": "",
+            "firstname": " Marie",
+            "email": "marie.dupont@test.com",
+            "password": "Motdepasse123!",
+            "passwordConfirm": "Motdepasse123!"
+        },
+        "expectedError": "le nom est obligatoire"
+    },
+    {
+        "description": "prénom vide",
+        "data": {
+            "lastname": "dupont",
+            "firstname": "",
+            "email": "marie.dupont@test.com",
+            "password": "Motdepasse123!",
+            "passwordConfirm": "Motdepasse123!"
+        },
+        "expectedError": "le prénom est obligatoire"
+    },
+    {
+        "description": "Email vide",
+        "data": {
+            "lastname": "dupont",
+            "firstname": " Marie",
+            "email": "",
+            "password": "Motdepasse123!",
+            "passwordConfirm": "Motdepasse123!"
+        },
+        "expectedError": "l'email est obligatoire"
+    },
+    {
+        "description": "email invalide",
+        "data": {
+            "lastname": "dupont",
+            "firstname": " Marie",
+            "email": "marieemail",
+            "password": "Motdepasse123!",
+            "passwordConfirm": "Motdepasse123!"
+        },
+        "expectedError": "Merci de remplir correctement tous les champs (adresse email, mot de passe de 5 caractères minimum, confirmation identique)"
+    },
+    {
+        "description": "mot de passe vide",
+        "data": {
+            "lastname": "dupont",
+            "firstname": " Marie",
+            "email": "marie.dupont@test.com",
+            "password": "",
+            "passwordConfirm": ""
+        },
+        "expectedError": "Merci de remplir correctement tous les champs (adresse email, mot de passe de 5 caractères minimum, confirmation identique)"
+    },
+    {
+        "description": "mot de passe trop court",
+        "data": {
+            "lastname": "dupont",
+            "firstname": " Marie",
+            "email": "marie.dupont@test.com",
+            "password": "234",
+            "passwordConfirm": "234"
+        },
+        "expectedError": "Merci de remplir correctement tous les champs (adresse email, mot de passe de 5 caractères minimum, confirmation identique)"
+    },
+    {
+        "description": "mot de passe sans chiffre ni caractère spécial ",
+        "data": {
+            "lastname": "dupont",
+            "firstname": " Marie",
+            "email": "marie.dupont@test.com",
+            "password": "motdepasse",
+            "passwordConfirm": "Motdepasse"
+        },
+        "expectedError": "Merci de remplir correctement tous les champs (adresse email, mot de passe de 5 caractères minimum, confirmation identique)"
+    },
+    {
+        "description": "confirmation mot de passe vide",
+        "data": {
+            "lastname": "dupont",
+            "firstname": " Marie",
+            "email": "marie.dupont@test.com",
+            "password": "Motdepasse123!",
+            "passwordConfirm": ""
+        },
+        "expectedError": "Merci de remplir correctement tous les champs (adresse email, mot de passe de 5 caractères minimum, confirmation identique)"
+    },
+    {
+        "description": "mots de pass non identiques",
+        "data": {
+            "lastname": "dupont",
+            "firstname": " Marie",
+            "email": "marie.dupont@test.com",
+            "password": "Motdepasse123!",
+            "passwordConfirm": "Motdepasse"
+        },
+        "expectedError": "Merci de remplir correctement tous les champs (adresse email, mot de passe de 5 caractères minimum, confirmation identique)"
+    },
+    {
+        "description": "tous les champs sont valides",
+        "data": {
+            "lastname": "dupont",
+            "firstname": " Marie",
+            "email": "marie.dupont@test.com",
+            "password": "Motdepasse123!",
+            "passwordConfirm": "Motdepasse123!"
+        }
+    }
+]
