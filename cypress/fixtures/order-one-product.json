@@ -1,0 +1,21 @@
+{
+    "id": 46,
+    "firstname": "farah",
+    "lastname": "hervouet",
+    "address": "",
+    "zipCode": "",
+    "city": "",
+    "date": "2025-10-19T21:35:02.744Z",
+    "validated": false,
+    "orderLines": [
+        {
+            "quantity": 1,
+            "product": {
+                "name": "Chuchotements d'été",
+                "description": "Savon surgras à l'huile d'olive, particulièrement utile contre la peau sèche.",
+                "price": "37",
+                "picture": "https://cdn.pixabay.com/photo/2017/09/07/19/43/soap-2726387_960_720.jpg"
+            }
+        }
+    ]
+}

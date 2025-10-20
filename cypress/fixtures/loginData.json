@@ -6,5 +6,13 @@
     "wrongData": {
         "username": "toto@testing.fr",
         "password": "testingwrongpass"
+    },
+    "validUserEmptyCart": {
+        "username": "test@exemple.com",
+        "password": "passwordTest123"
+    },
+    "validUserCartOne": {
+        "username": "client@example.com",
+        "password": "Client123!"
     }
 }
