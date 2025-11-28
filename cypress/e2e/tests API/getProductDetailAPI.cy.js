@@ -17,15 +17,15 @@ describe('test de detail de produit API', () => {
 
     it('récupérer le détail de produits selon l`id', () => {
         cy.fixture('productIds.json').then((productIds) => {
-            productIds.forEach((productId)=>{
+            cy.wrap(productIds).each((productId) => {
                 cy.request({
                     method: 'GET',
                     url: `${apiURL}/products/${productId}`,
-                    headers: {Authorization: `Bearer ${token}`},
+                    headers: { Authorization: `Bearer ${token}` },
                     failOnStatusCode: false
-                }).then((response)=>{
+                }).then((response) => {
                     expect(response.status, `status pour id ${productId}`).to.eq(200);
-                    const product= response.body;
+                    const product = response.body;
                     expect(product).to.be.an('object');
                     expect(product).to.have.property('id', productId);
                     expect(product).to.have.property('name').and.to.be.a('string');
@@ -37,10 +37,23 @@ describe('test de detail de produit API', () => {
                     expect(product).to.have.property('price').and.to.be.a('number');
                     expect(product).to.have.property('picture').and.to.be.a('string');
                     expect(product).to.have.property('varieties').and.to.be.a('number');
-                })
-            })
-        })
+                });
+            });
+        });
+    });
+    it('récupérer le détail d’un produit avec un id inexistant (échec)', () => {
+        const invalidId = 999999; // un id qui n'existe pas
 
+        cy.request({
+            method: 'GET',
+            url: `${apiURL}/products/${invalidId}`,
+            headers: { Authorization: `Bearer ${token}` },
+            failOnStatusCode: false
+        }).then((response) => {
 
-    })
-})
+            expect(response.status).to.be.oneOf([404, 400]);
+
+        
+        });
+    });
+});

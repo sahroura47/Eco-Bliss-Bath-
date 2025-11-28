@@ -37,4 +37,24 @@ npm i
 ou
 npm install (si vous préférez)
 ```
+# pour lancer le projet ( partie front)
 
+Lancer le backend depuis docker desktop
+
+Rendez-vous dans le dossier Eco-Bliss-Bath-V2/frontend
+
+ng serve
+
+# pour lancer les tests cypress
+
+Rendez-vous dans le dossier Eco-Bliss-Bath-V2
+
+npx cypress open
+
+choisir l'option e2e
+
+sélectionner un navigateur 
+
+sélectionner un test que tu veux tester dans le spec
+
+exécute le test

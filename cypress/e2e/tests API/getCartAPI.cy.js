@@ -13,7 +13,7 @@ describe('tests d`api panier', () => {
             });
         });
     });
-    it('on récupére le panier d`un utilisateur connecté', () => {
+    it('on récupére le panier d`un utilisateur connecté (cas succès)', () => {
         cy.request({
             method: 'GET',
             url: `${apiURL}/orders`,
@@ -43,7 +43,7 @@ describe('tests d`api panier', () => {
             expect(product.picture).to.be.a('string').and.to.contain('http');
         });
     });
-    it('récupère le panier vide d`un utilisateur connecté', () => {
+    it('récupère le panier vide d`un utilisateur connecté ( cas échec)', () => {
         cy.fixture('loginData.json').then((data) => {
             const user = data.validUserEmptyCart;
             cy.request('POST', `${apiURL}/login`, {

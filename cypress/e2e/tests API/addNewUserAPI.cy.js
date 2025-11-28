@@ -1,6 +1,6 @@
 describe('tests d`API de création de compte', () => {
     const apiURL = "http://localhost:8081";
-    it('création de compte avec des scénarios valides', () => {
+    it('création de compte avec des scénarios valides ( cas succès)', () => {
         cy.fixture('registerPageData.json').then((scenarios) => {
 
             const validScenarios = scenarios.filter(s => !s.expectedError);
@@ -33,7 +33,7 @@ describe('tests d`API de création de compte', () => {
             });
         });
     });
-    it('création de compte avec des scénarios invalides', () => {
+    it('création de compte avec des scénarios invalides ( cas échec)', () => {
         cy.fixture('registerPageData.json').then((scenarios) => {
             const invalidScenarios = scenarios.filter(s => s.expectedError);
 

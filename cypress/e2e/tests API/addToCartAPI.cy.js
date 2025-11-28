@@ -14,7 +14,7 @@ describe('ajout au panier test d`api', () => {
             });
         });
     });
-    it('ajout du plusieurs produits au panier', () => {
+    it('ajout du plusieurs produits au panier ( cas succès)', () => {
         cy.fixture('productIds.json').then((productIds) => {
             productIds.forEach((id) => {
                 const productToAdd = { product: id, quantity: 1 }
@@ -38,4 +38,19 @@ describe('ajout au panier test d`api', () => {
             });
         });
     });
+    it('ajout d`un produit au panier (cas échec)', () => {
+        const invalidProduct = { product: 'produit-invalide', quantity: 1 };
+
+        cy.request({
+            method: 'PUT',
+            url: `${apiURL}/orders/add`,
+            headers: { Authorization: `Bearer ${token}` },
+            body: invalidProduct,
+            failOnStatusCode: false
+        }).then((response) => {
+            
+            expect(response.status).to.be.oneOf([400, 404]);
+        });
+
+    })
 });

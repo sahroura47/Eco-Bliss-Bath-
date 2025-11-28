@@ -11,7 +11,7 @@ describe('test de sécurité faille xss review page', () => {
         });
     });
 
-    it('test pour détecter la faille xss dans le champs titre', () => {
+    it('vérifier l`absence de la faille xss dans le champs titre', () => {
         const xssPayload = `<img src=x onerror=alert("xss")>`;
 
         cy.on('window:alert', () => {
@@ -32,7 +32,7 @@ describe('test de sécurité faille xss review page', () => {
         });
 
     });
-    it('détection de faille xss dans le champs commentaire', () => {
+    it('vérifier l`absence de faille xss dans le champs commentaire', () => {
         const xssPayload = `<script>alert("xss")</script>`;
         cy.on('window:alert', () => {
             throw new Error('XSS exécuté!');

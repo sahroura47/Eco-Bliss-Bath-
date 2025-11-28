@@ -15,7 +15,7 @@ describe('test de confirmation de commande API', () => {
         });
     });
 
-    it('confirmation de commande', () => {
+    it('confirmation de commande ( cas succès)', () => {
         cy.fixture('productIds.json').then((productIds) => {
             productIds.forEach((id) => {
                 const productToAdd = { product: id, quantity: 1 }
@@ -59,4 +59,49 @@ describe('test de confirmation de commande API', () => {
             });
         });
     });
+    it('test confirmation de commande (cas échoue)', () => {
+        cy.fixture('productIds.json').then((productIds) => {
+            productIds.forEach((id) => {
+                const productToAdd = { product: id, quantity: 1 }
+                cy.then(() => {
+                    cy.request({
+                        method: 'PUT',
+                        url: `${apiURL}/orders/add`,
+                        headers: { Authorization: `Bearer ${token}` },
+                        body: productToAdd,
+                        failOnStatusCode: false
+                    }).then((response) => {
+                        expect(response.status).to.be.eq(200);
+                        const body = response.body;
+
+                        const addedLine = body.orderLines.find(line => line.product.id === id);
+                        expect(addedLine).to.exist;
+                        expect(addedLine.quantity).to.be.gte(1);
+
+                    });
+                });
+            });
+        });
+        const invalidOrder = {
+            firstname: "",
+            lastname: "",
+            address: "",
+            zipCode: "00000",
+            city: "Paris"
+        };
+        cy.request({
+            method: 'POST',
+            url: `${apiURL}/orders`,
+            headers: { Authorization: `Bearer ${token}` },
+            body: invalidOrder,
+            failOnStatusCode: false
+        }).then((response) => {
+
+            expect(response.status).to.be.oneOf([400, 422]);
+
+            if (response.status !== 200) {
+                expect(response.body).to.have.property('error');
+            }
+        });
+    })
 });

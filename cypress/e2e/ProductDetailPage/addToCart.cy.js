@@ -31,36 +31,52 @@ describe('scenarios d`ajout des produits au panier', () => {
                 cy.request('GET', `http://localhost:8081/products/${productId}`).then((res) => {
                     const product = res.body;
 
-                    if (product.availableStock > 0) {
-                        cy.log(`✅ produit "${product.name}" a du stock (${product.availableStock})`);
-                        // on change la quantité // 
-                        cy.get('[data-cy=detail-product-quantity]')
-                            .clear()
-                            .type('2')
-                            .should('have.value', '2');
-                        // ajout au panier
-                        cy.get('[data-cy=detail-product-add]').click();
+                    if (product.availableStock < 0) {
+                        cy.log(`stock insuffisant pour "${product.name}": ${product.availableStock}`);
+                        cy.get('[data-cy=detail-product-add]').click({ force: true });
 
-                        // vérifie la redirection selon utilisateur connecté ou pas
-                        cy.url().then((url) => {
-                            if (url.includes('/login')) {
-                                cy.log('⚠️ utilisateur non connecté et redirigé vers la page de connexion');
-                            } else if (url.includes('/cart')) {
-                                cy.log('✅ utilisateur connecté et redirigé vers le panier');
+                        cy.visit('/cart');
 
-                                // on vérifie le produit ajouté est bien dans le panier
-                                cy.get('[data-cy=cart-empty]').should('not.exist');
-                                cy.get('[data-cy=cart-line]').within(() => {
-                                    cy.get('[data-cy=cart-line-name]').contains(product.name);
-                                    cy.get('[data-cy=cart-line-quantity]').should('have.value', 2);
-                                    cy.get('[data-cy=cart-line-total]').should('contain', (2 * product.price).toFixed(2));
-                                });
-                            } else {
-                                throw new Error(`redirection inattendue: ${url}`);
+                        cy.get('body').then(($body) => {
+
+                            const found = $body.find('[data-cy=cart-line-name]').toArray()
+                                .some(el => el.innerText.includes(product.name));
+                            if (found) {
+                                throw new Error(`ERREUR: produit "${product.name}" ajouté au panier alors qu'il ne devrait pas!`)
                             }
-                        })
+                        });
 
+                        return;
                     }
+                    // si stock > 0
+                    cy.log(`✅ produit "${product.name}" a du stock (${product.availableStock})`);
+                    // on change la quantité // 
+                    cy.get('[data-cy=detail-product-quantity]')
+                        .clear()
+                        .type('2')
+                        .should('have.value', '2');
+                    // ajout au panier
+                    cy.get('[data-cy=detail-product-add]').click();
+
+                    // vérifie la redirection selon utilisateur connecté ou pas
+                    cy.url().then((url) => {
+                        if (url.includes('/login')) {
+                            cy.log('⚠️ utilisateur non connecté et redirigé vers la page de connexion');
+                        } else if (url.includes('/cart')) {
+                            cy.log('✅ utilisateur connecté et redirigé vers le panier');
+
+                            // on vérifie le produit ajouté est bien dans le panier
+                            cy.get('[data-cy=cart-empty]').should('not.exist');
+                            cy.get('[data-cy=cart-line]').within(() => {
+                                cy.get('[data-cy=cart-line-name]').contains(product.name);
+                                cy.get('[data-cy=cart-line-quantity]').should('have.value', 2);
+                                cy.get('[data-cy=cart-line-total]').should('contain', (2 * product.price).toFixed(2));
+                            });
+                        } else {
+                            throw new Error(`redirection inattendue: ${url}`);
+                        }
+                    })
+
                 });
             });
         });

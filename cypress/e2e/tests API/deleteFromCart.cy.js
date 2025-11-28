@@ -66,4 +66,15 @@ describe('suppression de produits du panier test d`api', () => {
             });
         });
     });
+    it('suppression d`un produit du panier( erreur simulée)', ()=>{
+        const invalidId= "produit-invalide";
+        cy.request({
+            method: 'DELETE',
+            url: `${apiURL}/orders/${invalidId}/delete`,
+            headers: { Authorization: `Bearer ${token}`},
+            failOnStatusCode: false
+        }).then((response)=>{
+            expect(response.status).to.be.oneOf([400,404])
+        });
+    });
 });
