@@ -1,6 +1,9 @@
 describe('tests de suppression de produits du panier', () => {
     const apiURL = 'http://localhost:8081';
     const fakeToken = 'fake-jwt-token';
+    function mockInterception () {
+        
+    }
     it('vider le panier pour un utilisateur qui a un seul produit', () => {
         cy.fixture('order-one-product.json').then((order) => {
             cy.fixture('loginData.json').then((data) => {

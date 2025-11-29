@@ -29,6 +29,8 @@ docker compose up -d
 # Pour démarrer le frontend de l'applicatif
 Rendez-vous dans le dossier frontend
 ```
+Dans le terminal: 
+
 cd ./frontend
 ```
 Installez les dépendances du projet

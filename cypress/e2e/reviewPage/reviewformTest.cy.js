@@ -51,7 +51,7 @@ describe('validation du formulaire', () => {
             });
         });
     });
-    it('se connecte si les champs sont valides', () => {
+    it('ajout d`avis avec les champs sont valides', () => {
         cy.get('@reviewData').then((reviewData) => {
             reviewData.validData.forEach((scenario) => {
                 if (scenario.filled.title) {

@@ -1,4 +1,5 @@
 describe('review page test-UI', () => {
+    const apiURL = 'http://localhost:8081';
     context('utilisateur non connecté', () => {
         beforeEach(() => {
             localStorage.removeItem('user');
@@ -15,7 +16,8 @@ describe('review page test-UI', () => {
     });
     it('affiche la section avis', () => {
         // on vérifie au moins un avis est présent dans la page // 
-        cy.get('[data-cy=review-detail]').first().should('be.visible');
+        cy.visit('/reviews');
+        cy.get('[data-cy=review-detail]').should('be.visible');
         cy.get('[data-cy=reviews-average]').should('exist').and('be.visible');
         cy.get('[data-cy=reviews-number]').should('exist').and('be.visible');
 
@@ -39,8 +41,8 @@ context('utilisateur connecté', () => {
     });
     it('affiche le formulaire et pas le message de connexion', () => {
         cy.get('[data-cy=review-form]').should('be.visible');
-        cy.get('@reviewData').then((reviewData) =>{
-        cy.contains(reviewData.loginPrompt).should('not.exist');
+        cy.get('@reviewData').then((reviewData) => {
+            cy.contains(reviewData.loginPrompt).should('not.exist');
         })
     });
 });

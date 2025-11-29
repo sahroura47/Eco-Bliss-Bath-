@@ -31,6 +31,4 @@ describe('test UI page produit selon id ', () => {
             cy.get('[data-cy=detail-product-quantity]').should('be.visible');
         });
     });
-    
-
 });
